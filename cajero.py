@@ -73,3 +73,23 @@ def procesar_transacciones():
         # resumen final
         f.write(f"\nSaldo final: ${saldo:.2f}\n")
         f.write("=== FIN DEL REGISTRO ===\n")
+        
+if _name_ == "_main_":
+    print("\n=== SIMULADOR DE CAJERO AUTOMÁTICO ===")
+    print(f"Saldo inicial: ${saldo:.2f}")
+    print("Iniciando hilos...\n")
+ 
+    hilo_productor  = threading.Thread(target=generar_transacciones)
+    hilo_consumidor = threading.Thread(target=procesar_transacciones)
+ 
+    # Ambos hilos arrancan "al mismo tiempo"
+    # Sin el semáforo, podrían leer/escribir saldo simultáneamente → corrupción de datos
+    hilo_productor.start()
+    hilo_consumidor.start()
+ 
+    hilo_productor.join()   # espera a que el productor termine
+    hilo_consumidor.join()  # espera a que el consumidor termine
+ 
+    print(f"\nSaldo final: ${saldo:.2f}")
+    print(f"Registro guardado en '{archivo_salida}'")
+    print("=== FIN ===\n")
