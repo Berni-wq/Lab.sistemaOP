@@ -25,7 +25,7 @@ def generar_transacciones():
         tipo = random.choice(tipos)
         monto = round(random.uniform(50, 500), 2)
         
-        # acquire() "tomo el semáforo", bloqueo a otros hilos
+        # acquire() "tomo el semaaforo", bloqueo a otros hilos
         semaforo.acquire()
         operaciones.append((tipo, monto))
         print(f"  [Cajero] Transacción ingresada: {tipo} ${monto}")
@@ -48,7 +48,7 @@ def procesar_transacciones():
         while procesadas < NUM_OPERACIONES:
             time.sleep(0.5)  # espera un poco antes de intentar procesar
  
-            # acquire() → entra a la sección crítica
+            # acquire() entra a la sección crítica
             semaforo.acquire()
             if operaciones:
                 tipo, monto = operaciones.pop(0)  # toma la primera transacción pendiente
