@@ -74,7 +74,7 @@ def procesar_transacciones():
         f.write(f"\nSaldo final: ${saldo:.2f}\n")
         f.write("=== FIN DEL REGISTRO ===\n")
         
-if _name_ == "_main_":
+if __name__ == "__main__":
     print("\n=== SIMULADOR DE CAJERO AUTOMÁTICO ===")
     print(f"Saldo inicial: ${saldo:.2f}")
     print("Iniciando hilos...\n")
