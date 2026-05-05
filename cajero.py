@@ -5,6 +5,7 @@
 import threading
 import random
 import time
+import os
 
 #SEMÁFORO: controla el acceso al saldo compartido.
 #Valor inicial 1 = solo UN hilo puede operar a la vez.
@@ -14,7 +15,7 @@ semaforo = threading.Semaphore(1)
 saldo = 1000.0        # saldo inicial compartido entre ambos hilos
 operaciones = []      # lista compartida: el productor escribe, el consumidor lee
 NUM_OPERACIONES = 8
-archivo_salida = "resultados.txt"
+archivo_salida = os.path.join(os.path.dirname(_file_), "resultados.txt")
 
 # HILO PRODUCTOR: genera transacciones aleatorias
 # Simula clientes haciendo depósitos o retiros en el cajero
